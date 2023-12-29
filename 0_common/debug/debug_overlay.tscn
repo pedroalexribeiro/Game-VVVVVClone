@@ -1,0 +1,79 @@
+[gd_scene load_steps=5 format=3 uid="uid://ccwr0y8vuhsdc"]
+
+[ext_resource type="Script" path="res://0_common/debug/DebugOverlay.cs" id="1_a0kk2"]
+[ext_resource type="Script" path="res://0_common/debug/DebugDraw3D.cs" id="2_bf03w"]
+[ext_resource type="Script" path="res://0_common/debug/DrawText.cs" id="3_r3yqc"]
+[ext_resource type="Script" path="res://0_common/debug/ChangeResources.cs" id="4_l760w"]
+
+[node name="DebugOverlay" type="CanvasLayer" node_paths=PackedStringArray("_draw", "_textDraw", "_tabDraw")]
+script = ExtResource("1_a0kk2")
+_draw = NodePath("Draw3DVectors")
+_textDraw = NodePath("DrawText")
+_tabDraw = NodePath("ChangeResources")
+
+[node name="Draw3DVectors" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("2_bf03w")
+
+[node name="DrawText" type="Control" parent="." node_paths=PackedStringArray("_textContainer")]
+custom_minimum_size = Vector2(500, 300)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 500.0
+offset_bottom = 300.0
+script = ExtResource("3_r3yqc")
+_textContainer = NodePath("Container/MarginContainer/VBoxContainer")
+
+[node name="Container" type="BoxContainer" parent="DrawText"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="DrawText/Container"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DrawText/Container/MarginContainer"]
+layout_mode = 2
+
+[node name="ChangeResources" type="Control" parent="." node_paths=PackedStringArray("_tabContainer")]
+custom_minimum_size = Vector2(400, 500)
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -250.0
+offset_right = 200.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+script = ExtResource("4_l760w")
+_tabContainer = NodePath("MarginContainer/TabContainer")
+
+[node name="MarginContainer" type="MarginContainer" parent="ChangeResources"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="TabContainer" type="TabContainer" parent="ChangeResources/MarginContainer"]
+layout_mode = 2
